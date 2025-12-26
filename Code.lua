@@ -133,7 +133,7 @@ BuyTab:Button({
     Callback = function() 
         local args = {
 	"Turret",
-	5000
+	0
 }
 game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("BoughtPlaceable"):FireServer(unpack(args))
     end 
