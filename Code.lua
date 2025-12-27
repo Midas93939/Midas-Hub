@@ -3,7 +3,8 @@ local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footag
 local folders = workspace:WaitForChild("GAMEFOLDERS", 10)
 local customersFolder = folders:WaitForChild("Customers"):WaitForChild("Alive")
 local npcFolder = folders:WaitForChild("NPCs")
-local swatFolder = npcFolder:WaitForChild("SWAT", 5) -- Path for SWAT
+local swatFolder = npcFolder:WaitForChild("SWAT", 5)
+local theifFolder = npcFolder:WaitForChild("Thief", 5)
 local meleeEvent = game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("MeleeHitEvent")
 
 local isRunning = false
@@ -58,7 +59,14 @@ local function runAttack()
                         )
                     end
                 end
-           
+
+           elseif name == "Thief" then
+                for _, npc in pairs(npcFolder:GetChildren()) do
+                    if npc.Name == "Thief" and npc:FindFirstChild("Head") then
+                        meleeEvent:FireServer(npc.HeadHitbox, npc.HeadHitbox.Position, Vector3.new(0.53, 0, -0.84), 20)
+                    end
+                end
+
             elseif name == "Cop" then
                 for _, npc in pairs(npcFolder:GetChildren()) do
                     if npc.Name == "Cop" and npc:FindFirstChild("HeadHitbox") then
