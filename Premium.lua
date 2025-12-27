@@ -31,7 +31,7 @@ local Window = WindUI:CreateWindow({
         Draggable = true,
         Title = "Midas Hub",
         CornerRadius = UDim.new(1, 0),
-        Color = ColorSequence.new(Color3.fromHex("#0195FF"), Color3.fromHex("#9500FF"))
+        Color = ColorSequence.new(Color3.fromHex("#FFF700"), Color3.fromHex("#FF9200"))
     }
 })
 
