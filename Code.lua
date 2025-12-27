@@ -80,6 +80,7 @@ end
 
 local MainTab = Window:Tab({ Title = "Farming", Icon = "solar:home-2-bold" })
 local BuyTab = Window:Tab({ Title = "Buy", Icon = "solar:home-2-bold" })
+local HacksTab = Window:Tab({ Title = "Hacks", Icon = "solar:home-2-bold" })
 local HelpTab = Window:Tab({ Title = "Info", Icon = "solar:help-bold" })
 
 MainTab:Section({ Title = "Master Control" })
@@ -123,20 +124,6 @@ TargetDropdown = MainTab:Dropdown({
             end
         end
     end
-})
-
-BuyTab:Section({ Title = "Defense" })
-
-BuyTab:Button({ 
-    Title = "Buy Turret", 
-    Justify = "Center", 
-    Callback = function() 
-        local args = {
-	"Turret",
-	0
-}
-game:GetService("ReplicatedStorage"):WaitForChild("Remotes"):WaitForChild("BoughtPlaceable"):FireServer(unpack(args))
-    end 
 })
 
 BuyTab:Section({ Title = "Gun" })
@@ -208,6 +195,10 @@ BuyTab:Button({
 game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("Blackmarket_BuyAmmoRequest"):FireServer(unpack(args))
     end 
 })
+
+HacksTab:Section({ Title = "Inf defense" })
+
+HacksTab:Button({ Title = "Inf Turret", Justify = "Center", Callback = function() WindUI:Notify({ Title = "Midas Hub", Content = "This function requires Midas Hub Premuim", Type = "Success", Duration = 3 }) end })
 
 -- --- Help Tab ---
 
