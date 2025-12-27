@@ -3,8 +3,8 @@ local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footag
 local folders = workspace:WaitForChild("GAMEFOLDERS", 10)
 local customersFolder = folders:WaitForChild("Customers"):WaitForChild("Alive")
 local npcFolder = folders:WaitForChild("NPCs")
-local swatFolder = npcFolder:WaitForChild("SWAT", 5)
-local theifFolder = npcFolder:WaitForChild("Thief", 5)
+local swatFolder = npcFolder
+local theifFolder = npcFolder
 local meleeEvent = game:GetService("ReplicatedStorage"):WaitForChild("Network"):WaitForChild("MeleeHitEvent")
 
 local isRunning = false
