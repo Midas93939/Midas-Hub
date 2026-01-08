@@ -3,7 +3,7 @@ local StarterGui = game:GetService("StarterGui")
 
 local gameScripts = {
     [7498898979]     = "https://raw.githubusercontent.com/Midas93939/Midas-Hub/refs/heads/main/Burgerz.lua", -- Added your new ID
-    [9098443082]      = "https://raw.githubusercontent.com/aserbadawy-cloud/Midas93939/refs/heads/main/Dive.lua"
+    [9098443082]      = "https://raw.githubusercontent.com/Midas93939/Midas-Hub/refs/heads/main/Dive.lua"
 }
 
 
