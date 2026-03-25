@@ -3,176 +3,214 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MIDAS HUB | ELITE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
+    <title>MIDAS HUB | ELITE ACCESS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --gold: #fcc200;
-            --bg: #050505;
-            --card: rgba(20, 20, 20, 0.8);
-            --border: rgba(252, 194, 0, 0.2);
+            --midas-gold: #fcc200;
+            --midas-dark: #050505;
+            --midas-card: rgba(20, 20, 20, 0.9);
+            --border-width: 3px; /* Thin, sharp lines */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--bg);
+            background-color: var(--midas-dark);
             color: #fff;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow: hidden;
-            background: radial-gradient(circle at center, #111 0%, #050505 100%);
+            /* Subtly matches the blue hue in the logo top */
+            background: radial-gradient(circle at center, #0a0e1a 0%, #050505 100%);
         }
 
-        /* Animated Background Particles */
-        .bg-glow {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: var(--gold);
-            filter: blur(150px);
-            opacity: 0.1;
-            border-radius: 50%;
-            z-index: 0;
-            animation: float-bg 10s infinite alternate;
+        /* --- Moving Rainbow Viewport Frame --- */
+        .rainbow-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none; /* User can click through it */
+            z-index: 1000;
         }
 
-        @keyframes float-bg {
-            from { transform: translate(-50%, -50%); }
-            to { transform: translate(50%, 50%); }
+        /* Continuous rainbow gradient animation around the body */
+        body::after {
+            content: "";
+            position: fixed;
+            top: calc(-1 * var(--border-width));
+            left: calc(-1 * var(--border-width));
+            right: calc(-1 * var(--border-width));
+            bottom: calc(-1 * var(--border-width));
+            border: var(--border-width) solid transparent;
+            /* Matches the spectrum order in the logo: Blue -> Green -> Red -> Yellow */
+            background-image: linear-gradient(var(--midas-dark), var(--midas-dark)), 
+                              linear-gradient(90deg, #00ffff, #00ff00, #ff0000, #ffff00, #00ffff);
+            background-origin: border-box;
+            background-clip: padding-box, border-box;
+            background-size: 200% 100%;
+            animation: moveRainbowBorder 4s linear infinite;
         }
 
+        @keyframes moveRainbowBorder {
+            0% { background-position: 100% 0%; }
+            100% { background-position: 0% 0%; }
+        }
+
+        /* --- Main UI Elements --- */
         .main-container {
             position: relative;
-            z-index: 1;
+            z-index: 1; /* Sits above the body background but under the rainbow frame */
             width: 100%;
-            max-width: 450px;
+            max-width: 480px;
             text-align: center;
             padding: 20px;
         }
 
-        /* Floating Logo Animation */
+        /* Floating Logo: Large, Center-Focused */
         .logo {
-            width: 160px;
-            filter: drop-shadow(0 0 20px rgba(252, 194, 0, 0.3));
-            animation: breathe 4s ease-in-out infinite;
-            margin-bottom: 20px;
+            width: 190px; /* Increased size for impact */
+            filter: drop-shadow(0 0 15px rgba(252, 194, 0, 0.4));
+            animation: breathe 5s ease-in-out infinite; /* Slower, deeper breath */
+            margin-bottom: 15px;
         }
 
         @keyframes breathe {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.02); }
+            0%, 100% { transform: translateY(0) scale(1.0); }
+            50% { transform: translateY(-12px) scale(1.03); }
         }
 
         h1 {
             font-family: 'Syncopate', sans-serif;
-            font-size: 1.8rem;
-            letter-spacing: 8px;
-            color: var(--gold);
-            margin-bottom: 10px;
+            font-size: 2.1rem;
+            letter-spacing: 10px;
+            color: var(--midas-gold);
+            margin-bottom: 25px;
             text-transform: uppercase;
+            font-weight: 700;
         }
 
         .glass-card {
-            background: var(--card);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 15px;
-            padding: 30px;
-            margin-top: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            background: var(--midas-card);
+            backdrop-filter: blur(15px); /* Stronger glassmorphism */
+            border: 1px solid rgba(252, 194, 0, 0.1); /* Subtle glow on card */
+            border-radius: 18px;
+            padding: 35px;
+            margin-top: 10px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.6);
         }
 
         /* Interactive Menu */
         .menu-item {
-            padding: 15px;
-            margin: 10px 0;
-            border: 1px solid rgba(255,255,255,0.05);
-            border-radius: 8px;
+            padding: 16px;
+            margin: 12px 0;
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 10px;
             cursor: pointer;
-            transition: 0.3s;
-            background: rgba(255,255,255,0.02);
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255,255,255,0.01);
             text-transform: uppercase;
-            font-weight: 600;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: #ddd;
         }
 
         .menu-item:hover {
-            border-color: var(--gold);
-            background: rgba(252, 194, 0, 0.05);
-            letter-spacing: 4px;
+            border-color: var(--midas-gold);
+            background: rgba(252, 194, 0, 0.08);
+            letter-spacing: 5px; /* Subtle expand on hover */
+            color: #fff;
         }
 
-        /* Games List Animation */
+        /* Games List Transition */
         #games-list {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), margin-top 0.4s ease;
             text-align: left;
-            font-size: 0.75rem;
-            color: #888;
+            font-size: 0.8rem;
+            color: #aaa;
+            padding-left: 10px;
         }
 
         #games-list.active {
-            max-height: 200px;
-            margin-top: 10px;
-            padding-bottom: 10px;
+            max-height: 250px;
+            margin-top: 20px;
+            padding-bottom: 15px;
         }
 
         .game-entry {
             display: flex;
             justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.02);
         }
 
-        .status-dot { color: var(--gold); }
+        .game-entry:last-child { border-bottom: none; }
 
-        /* Button Styling */
+        .status-dot { 
+            color: var(--midas-gold); 
+            font-weight: 800;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+        }
+
+        /* Copy Button */
         .btn {
-            margin-top: 20px;
+            margin-top: 25px;
             width: 100%;
-            padding: 15px;
-            background: var(--gold);
+            padding: 18px;
+            background: var(--midas-gold);
             color: #000;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-family: 'Syncopate', sans-serif;
             font-weight: 700;
+            font-size: 0.95rem;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            letter-spacing: 2px;
         }
 
         .btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(252, 194, 0, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 0 40px rgba(252, 194, 0, 0.5);
+            letter-spacing: 3px;
         }
 
+        /* Notification */
         .notification {
             position: fixed;
-            bottom: 20px;
-            background: var(--gold);
+            bottom: 30px;
+            background: var(--midas-gold);
             color: #000;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 25px;
+            border-radius: 8px;
             font-weight: bold;
             display: none;
-            animation: slideUp 0.3s ease;
+            z-index: 2000; /* Above everything */
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            animation: slideUpFade 0.3s ease-out;
         }
 
-        @keyframes slideUp { from { transform: translateY(100px); } to { transform: translateY(0); } }
+        @keyframes slideUpFade { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     </style>
 </head>
 <body>
 
-    <div class="bg-glow"></div>
+    <div class="rainbow-frame"></div>
 
     <div class="main-container">
         <img src="Midas hub 2.png" class="logo" alt="MIDAS">
+        
         <h1>MIDAS HUB</h1>
         
         <div class="glass-card">
@@ -188,12 +226,12 @@
             <button class="btn" onclick="copyScript()">COPY LOADSTRING</button>
         </div>
 
-        <p style="margin-top: 20px; font-size: 0.6rem; color: #444; letter-spacing: 2px;">
-            STABLE_BUILD // ENCRYPTED_ACCESS
+        <p style="margin-top: 30px; font-size: 0.65rem; color: #444; letter-spacing: 3px; font-family: monospace;">
+            STABLE_BUILD // ACCESS_CODE: GOLDEN
         </p>
     </div>
 
-    <div id="notif" class="notification">LOADSTRING COPIED!</div>
+    <div id="notif" class="notification">LOADSTRING COPIED TO CLIPBOARD</div>
 
     <script>
         function toggleGames() {
@@ -201,12 +239,19 @@
         }
 
         function copyScript() {
-            const script = 'loadstring(game:HttpGet("YOUR_LINK_HERE"))()';
-            navigator.clipboard.writeText(script);
-            
-            const notif = document.getElementById('notif');
-            notif.style.display = 'block';
-            setTimeout(() => { notif.style.display = 'none'; }, 2000);
+            // Replace the text below with your actual Midas Hub loadstring
+            const script = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/MidasHub/Main/main/loader.lua"))()';
+            navigator.clipboard.writeText(script).then(() => {
+                const notif = document.getElementById('notif');
+                notif.style.display = 'block';
+                setTimeout(() => { 
+                    notif.style.animation = 'slideDownFade 0.3s ease-in';
+                    setTimeout(() => {
+                        notif.style.display = 'none'; 
+                        notif.style.animation = 'slideUpFade 0.3s ease-out'; // reset animation
+                    }, 250);
+                }, 2000);
+            });
         }
     </script>
 </body>
