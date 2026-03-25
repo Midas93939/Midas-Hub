@@ -3,112 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Midas Hub | Premier Scripting</title>
+    <title>Midas Hub | AUTOMATION ELITE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --midas-gold: #d4af37;
-            --midas-dark: #0a0a0b;
-            --text-gray: #a0a0a0;
+            /* Midas signature colors */
+            --midas-gold: #fcc200;
+            --midas-dark: #070707;
+            --midas-card-bg: #111113;
+            --midas-gold-glow: rgba(252, 194, 0, 0.4);
+            --rainbow-primary: #ff00ff; /* A base color for the logo's vibe */
         }
 
+        /* --- Global Resets --- */
         body {
             background-color: var(--midas-dark);
             color: #ffffff;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             margin: 0;
+            padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .hub-card {
-            background: linear-gradient(145deg, #111, #050505);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 12px;
-            padding: 50px;
-            width: 400px;
+        /* --- Main UI Structure --- */
+        .viewport-container {
+            width: 100%;
+            max-width: 1400px; /* Limits the max width of the site */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        /* --- Header Section --- */
+        .hub-header {
+            width: 100%;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            margin-bottom: 60px;
         }
 
-        .logo {
-            font-size: 2.2rem;
+        .hub-logo {
+            width: 180px; /* Sets the size of your rainbow-edged logo */
+            height: auto;
+            margin-bottom: 20px;
+            /* Subtly applies a filter to make the rainbow edge pop */
+            filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.5));
+            border-radius: 50%; /* Makes the container round to match the logo vibe */
+        }
+
+        .hub-title {
+            font-size: 3.5rem;
             font-weight: 800;
             color: var(--midas-gold);
-            letter-spacing: -1px;
-            margin-bottom: 5px;
+            letter-spacing: -2px;
+            margin: 0;
+            text-transform: uppercase;
+            text-shadow: 0 0 15px var(--midas-gold-glow);
+        }
+
+        .hub-subtitle {
+            font-size: 0.9rem;
+            letter-spacing: 5px;
+            color: #888;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        /* --- Main Interactive Panels --- */
+        .panel-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .midas-card {
+            background: var(--midas-card-bg);
+            border: 1px solid rgba(252, 194, 0, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .midas-card:hover {
+            border-color: var(--midas-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        .card-header {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--midas-gold);
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(252, 194, 0, 0.1);
+            padding-bottom: 10px;
+        }
+
+        /* --- Section 1: Connection --- */
+        .connection-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.8rem;
+            color: #ccc;
+        }
+
+        .pulse-light {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #00ff88; /* Operational green */
+            animation: pulse-green 1.5s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
+        }
+
+        /* --- Section 2: Supported Games (This is the dynamic part) --- */
+        .supported-games-header {
+            cursor: pointer; /* Tells the user they can click it */
+            color: var(--midas-gold);
+            transition: color 0.2s ease;
+        }
+
+        .supported-games-header:hover {
+            color: #ffffff;
+        }
+
+        .game-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            font-size: 0.9rem;
+            color: #eee;
+            /* Starts hidden */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .game-list.open {
+            /* Opens and shows the list */
+            max-height: 500px;
+            margin-top: 15px;
+            opacity: 1;
+        }
+
+        .game-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .game-item:last-child {
+            border-bottom: none;
+        }
+
+        .badge {
+            background-color: #ffffff;
+            color: #000;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.65rem;
             text-transform: uppercase;
         }
 
-        .subtitle {
-            color: var(--text-gray);
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            font-weight: 500;
+        /* --- Action Area --- */
+        .midas-action-panel {
+            width: 100%;
+            text-align: center;
+            max-width: 600px;
         }
 
-        .status-container {
-            background: rgba(212, 175, 55, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.1);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-        }
-
-        .status-item {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            margin: 5px 0;
-            color: var(--text-gray);
-        }
-
-        .online { color: #00ff88; font-weight: bold; }
-
-        .loadstring-box {
-            background: #000;
-            border: 1px solid #222;
-            color: #888;
-            padding: 12px;
-            font-family: monospace;
-            font-size: 0.7rem;
-            border-radius: 4px;
+        .midas-button {
+            background-color: transparent;
+            border: 2px solid var(--midas-gold);
+            color: var(--midas-gold);
+            padding: 15px 40px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 6px;
             cursor: pointer;
-            transition: border 0.2s;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .loadstring-box:hover {
-            border-color: var(--midas-gold);
+        .midas-button:hover {
+            background-color: var(--midas-gold);
+            color: #000;
+            box-shadow: 0 0 20px var(--midas-gold-glow);
         }
+
+        /* --- The rainbow bar across the top --- */
+        .rainbow-top {
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ff00ff, #00ffff, #00ff00, #ffff00, #ff0000);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="hub-card">
-        <div class="logo">Midas Hub</div>
-        <div class="subtitle">AUTOMATION ELITE</div>
+    <div class="rainbow-top"></div>
 
-        <div class="status-container">
-            <div class="status-item">
-                <span>STATUS:</span>
-                <span class="online">OPERATIONAL</span>
+    <div class="viewport-container">
+
+        <header class="hub-header">
+            <img src="image_0.png" alt="Midas Hub Logo" class="hub-logo">
+            <h1 class="hub-title">Midas Hub</h1>
+            <div class="hub-subtitle">Elite Automation Network</div>
+        </header>
+
+        <main class="panel-grid">
+            
+            <div class="midas-card">
+                <div class="card-header">Hub Connection</div>
+                <div class="connection-status">
+                    <div class="pulse-light"></div>
+                    <span>SYSTEM_OPERATIONAL // SECURE</span>
+                </div>
+                <p style="font-size: 0.8rem; color: #777; margin-top: 15px;">
+                    Midas Hub network is currently stable. v2.4.1 [Stable_Build]. No global downtime reported. 
+                </p>
             </div>
-            <div class="status-item">
-                <span>VERSION:</span>
-                <span>v2.4.1 (Stable)</span>
-            </div>
-            <div class="status-item">
-                <span>GAMES:</span>
-                <span>150+ SUPPORTED</span>
-            </div>
+
+            <div class="midas-card">
+                <div class="card-header supported-games-header" onclick="toggleGameList()">
+                    Supported Games (Click to view)
+                </div>
+                <ul class="game-list" id="game-list">
+                    <li class="game-item">
+                        <span>Burgerz</span>
+                        <span class="badge">ACTIVE</span>
+                    </li>
+                    <li class="game-item">
+                        <span>Dive!!!v0.2A</span>
+                        <span class="badge">TESTING</span>
+                    </li>
+                </div>
+            </ul>
         </div>
 
-        <div class="loadstring-box">
-            click to copy loadstring
-        </div>
+    </main>
+
+    <div class="midas-action-panel">
+        <a href="#" class="midas-button">ACCESS LOADSTRING</a>
     </div>
+
+</div>
+
+<script>
+    function toggleGameList() {
+        const gameList = document.getElementById('game-list');
+        gameList.classList.toggle('open');
+    }
+</script>
 
 </body>
 </html>
