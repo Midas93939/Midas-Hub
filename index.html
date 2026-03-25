@@ -3,223 +3,155 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Midas Hub | Official</title>
-
+<title>Midas Hub | Ultimate</title>
+<link rel="icon" type="image/png" href="image_0.png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
-* {margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body {background: linear-gradient(135deg,#020617,#0f172a);color:#e2e8f0;overflow-x:hidden;}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+body{background:#000;color:#fff;overflow-x:hidden;}
 
-header {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 40px;
-  background:rgba(15,23,42,0.8);
-  backdrop-filter:blur(10px);
-  position:sticky;
-  top:0;
-  z-index:1000;
-}
-
-.logo {font-size:26px;font-weight:700;color:#38bdf8;}
-
-nav a {
-  margin:0 15px;
-  text-decoration:none;
-  color:#cbd5f5;
-  transition:0.3s;
-}
-nav a:hover {color:#38bdf8;}
-
-.hero {
-  height:90vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-}
-
-.hero h1 {
-  font-size:56px;
-  background:linear-gradient(90deg,#38bdf8,#818cf8);
+/* Animated rainbow glow */
+.rainbow{
+  background:linear-gradient(270deg,red,orange,yellow,green,cyan,blue,violet);
+  background-size:1400% 1400%;
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  animation:rainbowMove 8s ease infinite;
 }
 
-.hero p {margin-top:15px;font-size:18px;color:#94a3b8;}
-
-.btn {
-  margin-top:25px;
-  padding:12px 25px;
-  border:none;
-  border-radius:30px;
-  background:#38bdf8;
-  color:#020617;
-  font-weight:600;
-  cursor:pointer;
-  transition:0.3s;
+@keyframes rainbowMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
-.btn:hover {transform:scale(1.05);background:#0ea5e9;}
+/* Glow particles */
+canvas{position:fixed;top:0;left:0;z-index:-1;}
 
-.section {
-  padding:80px 40px;
-  max-width:1200px;
-  margin:auto;
+header{display:flex;justify-content:space-between;align-items:center;padding:20px 40px;background:rgba(0,0,0,0.6);backdrop-filter:blur(15px);}
+.logo{font-size:26px;font-weight:700;}
+nav a{margin:0 15px;color:#aaa;text-decoration:none;transition:.3s;}
+nav a:hover{color:white;text-shadow:0 0 10px cyan;}
+
+.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;}
+.hero h1{font-size:80px;text-shadow:0 0 40px rgba(255,255,255,0.2);}
+.hero p{margin-top:20px;color:#bbb;max-width:700px;line-height:1.6;}
+
+.btn{
+  margin-top:30px;padding:15px 35px;border:none;border-radius:40px;
+  background:linear-gradient(270deg,red,orange,yellow,green,cyan,blue,violet);
+  background-size:1400% 1400%;animation:rainbowMove 6s ease infinite;
+  color:black;font-weight:700;cursor:pointer;
+  box-shadow:0 0 20px rgba(255,255,255,0.2);
+}
+.btn:hover{transform:scale(1.1);box-shadow:0 0 40px cyan;}
+
+.section{padding:100px 40px;max-width:1200px;margin:auto;}
+.section h2{text-align:center;margin-bottom:40px;font-size:38px;}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
+
+.card{
+  background:#050505;padding:25px;border-radius:20px;
+  border:1px solid #111;transition:.4s;
 }
 
-.section h2 {
-  text-align:center;
-  margin-bottom:40px;
-  font-size:32px;
+.card:hover{
+  transform:translateY(-10px) scale(1.05);
+  box-shadow:0 0 30px rgba(0,255,255,0.3);
+  border-color:cyan;
 }
 
-.cards {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
+.fade{opacity:0;transform:translateY(50px);transition:1s;}
+.fade.show{opacity:1;transform:translateY(0);}
 
-.card {
-  background:#1e293b;
-  padding:25px;
-  border-radius:20px;
-  transition:0.3s;
-}
-
-.card:hover {
-  transform:translateY(-8px);
-  box-shadow:0 10px 25px rgba(0,0,0,0.4);
-}
-
-.tabs {
-  display:flex;
-  justify-content:center;
-  margin-bottom:30px;
-}
-
-.tab {
-  padding:10px 20px;
-  cursor:pointer;
-  margin:0 5px;
-  border-radius:20px;
-  background:#1e293b;
-}
-
-.tab.active {background:#38bdf8;color:#020617;}
-
-.tab-content {display:none;}
-.tab-content.active {display:block;}
-
-.footer {
-  text-align:center;
-  padding:30px;
-  background:#020617;
-  color:#64748b;
-}
-
-.glow {
-  position:absolute;
-  width:300px;
-  height:300px;
-  background:#38bdf8;
-  filter:blur(120px);
-  opacity:0.2;
-  top:10%;
-  left:20%;
-}
+.footer{text-align:center;padding:40px;color:#666;}
 
 </style>
 </head>
 
 <body>
-
-<div class="glow"></div>
+<canvas id="bg"></canvas>
 
 <header>
-  <div class="logo">Midas Hub</div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#features">Features</a>
-    <a href="#games">Games</a>
-  </nav>
+<div class="logo rainbow">Midas Hub</div>
+<nav>
+<a href="#home">Home</a>
+<a href="#features">Features</a>
+<a href="#games">Games</a>
+</nav>
 </header>
 
 <section class="hero" id="home">
-  <h1>Midas Hub</h1>
-  <p>Next generation universal script hub with powerful features</p>
-  <button class="btn" onclick="scrollToSection('games')">View Supported Games</button>
+<h1 class="rainbow">Midas Hub</h1>
+<p>
+Midas Hub is a powerful next-generation universal script hub engineered for performance, precision, and dominance. Built with a modern animated interface and enhanced execution systems, it delivers seamless interaction, smooth performance, and an immersive experience unlike any other. With continuous updates, expanding support for games like Burgerz and Dive!!! v0.2A, and a visually stunning rainbow-glow design, Midas Hub stands as a premium solution for users who want speed, style, and advanced functionality all in one place. This is not just a hub — it is a complete experience designed to look and feel elite.
+</p>
+<button class="btn" onclick="scrollToSection('games')">Explore</button>
 </section>
 
-<section class="section" id="features">
-  <h2>Features</h2>
-  <div class="cards">
-    <div class="card">⚡ Fast Execution</div>
-    <div class="card">🛡️ Clean UI</div>
-    <div class="card">🎮 Multi Game Support</div>
-    <div class="card">🚀 Constant Updates</div>
-  </div>
-</section>
-
-<section class="section" id="games">
-  <h2>Supported Games</h2>
-
-  <div class="tabs">
-    <div class="tab active" onclick="openTab(event,'live')">Live</div>
-    <div class="tab" onclick="openTab(event,'coming')">Coming Soon</div>
-  </div>
-
-  <div id="live" class="tab-content active">
-    <div class="cards">
-      <div class="card">🍔 Burgerz</div>
-      <div class="card">🌊 Dive!!! v0.2A</div>
-    </div>
-  </div>
-
-  <div id="coming" class="tab-content">
-    <div class="cards">
-      <div class="card">🔒 More Games Coming...</div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <h2>Script</h2>
-  <div class="card">
-    <p>Click to copy script:</p>
-    <button class="btn" onclick="copyScript()">Copy Script</button>
-    <pre id="scriptBox" style="margin-top:15px;white-space:pre-wrap;">loadstring(game:HttpGet('https://your-script-link-here'))()</pre>
-  </div>
-</section>
-
-<div class="footer">
-  © 2026 Midas Hub. All rights reserved.
+<section class="section fade" id="features">
+<h2 class="rainbow">Features</h2>
+<div class="cards">
+<div class="card">⚡ Ultra Fast Execution</div>
+<div class="card">🌈 Animated UI System</div>
+<div class="card">🛡️ Advanced Protection</div>
+<div class="card">🎮 Multi Game Support</div>
+<div class="card">🚀 Constant Updates</div>
+<div class="card">💎 Premium Experience</div>
 </div>
+</section>
+
+<section class="section fade" id="games">
+<h2 class="rainbow">Supported Games</h2>
+<div class="cards">
+<div class="card">🍔 Burgerz</div>
+<div class="card">🌊 Dive!!! v0.2A</div>
+</div>
+</section>
+
+<div class="footer">© 2026 Midas Hub</div>
 
 <script>
-function openTab(evt, tabName) {
-  let contents = document.querySelectorAll('.tab-content');
-  let tabs = document.querySelectorAll('.tab');
-
-  contents.forEach(c => c.classList.remove('active'));
-  tabs.forEach(t => t.classList.remove('active'));
-
-  document.getElementById(tabName).classList.add('active');
-  evt.currentTarget.classList.add('active');
-}
-
 function scrollToSection(id){
-  document.getElementById(id).scrollIntoView({behavior:'smooth'});
+document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
-function copyScript(){
-  let text = document.getElementById('scriptBox').innerText;
-  navigator.clipboard.writeText(text);
-  alert('Script copied!');
+// scroll reveal
+const obs=new IntersectionObserver(e=>{
+e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('show');});});
+document.querySelectorAll('.fade').forEach(el=>obs.observe(el));
+
+// particle glow background
+const canvas=document.getElementById('bg');
+const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2+1,
+dx:(Math.random()-0.5),
+dy:(Math.random()-0.5)
+});}
+
+function animate(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{
+p.x+=p.dx;
+p.y+=p.dy;
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle='rgba(0,255,255,0.5)';
+ctx.fill();
+});
+requestAnimationFrame(animate);
 }
+animate();
 </script>
 
 </body>
