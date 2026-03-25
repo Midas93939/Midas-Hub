@@ -1,46 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>VoidShell</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midas Hub | Premier Scripting</title>
     <style>
+        :root {
+            --midas-gold: #d4af37;
+            --midas-dark: #0a0a0b;
+            --text-gray: #a0a0a0;
+        }
+
         body {
-            background-color: #050505;
+            background-color: var(--midas-dark);
             color: #ffffff;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            margin: 0;
         }
 
-        .container {
+        .hub-card {
+            background: linear-gradient(145deg, #111, #050505);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 50px;
+            width: 400px;
             text-align: center;
-            border-left: 2px solid #333;
-            padding-left: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        h1 {
-            font-size: 1.5rem;
-            letter-spacing: 4px;
-            margin: 0;
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--midas-gold);
+            letter-spacing: -1px;
+            margin-bottom: 5px;
             text-transform: uppercase;
-            color: #eee;
         }
 
-        p {
-            font-size: 0.8rem;
-            color: #555;
-            margin-top: 10px;
-            letter-spacing: 1px;
+        .subtitle {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            font-weight: 500;
+        }
+
+        .status-container {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            margin: 5px 0;
+            color: var(--text-gray);
+        }
+
+        .online { color: #00ff88; font-weight: bold; }
+
+        .loadstring-box {
+            background: #000;
+            border: 1px solid #222;
+            color: #888;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 0.7rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: border 0.2s;
+        }
+
+        .loadstring-box:hover {
+            border-color: var(--midas-gold);
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>VoidShell</h1>
-        <p>SYSTEM_ONLINE // ENCRYPTED</p>
+    <div class="hub-card">
+        <div class="logo">Midas Hub</div>
+        <div class="subtitle">AUTOMATION ELITE</div>
+
+        <div class="status-container">
+            <div class="status-item">
+                <span>STATUS:</span>
+                <span class="online">OPERATIONAL</span>
+            </div>
+            <div class="status-item">
+                <span>VERSION:</span>
+                <span>v2.4.1 (Stable)</span>
+            </div>
+            <div class="status-item">
+                <span>GAMES:</span>
+                <span>150+ SUPPORTED</span>
+            </div>
+        </div>
+
+        <div class="loadstring-box">
+            click to copy loadstring
+        </div>
     </div>
 
 </body>
