@@ -3,283 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Midas Hub | AUTOMATION ELITE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+    <title>MIDAS HUB | ELITE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@300;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Midas signature colors */
-            --midas-gold: #fcc200;
-            --midas-dark: #070707;
-            --midas-card-bg: #111113;
-            --midas-gold-glow: rgba(252, 194, 0, 0.4);
-            --rainbow-primary: #ff00ff; /* A base color for the logo's vibe */
+            --gold: #fcc200;
+            --bg: #050505;
+            --card: rgba(20, 20, 20, 0.8);
+            --border: rgba(252, 194, 0, 0.2);
         }
 
-        /* --- Global Resets --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background-color: var(--midas-dark);
-            color: #ffffff;
-            font-family: 'Montserrat', sans-serif;
-            margin: 0;
-            padding: 0;
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* --- Main UI Structure --- */
-        .viewport-container {
-            width: 100%;
-            max-width: 1400px; /* Limits the max width of the site */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-        }
-
-        /* --- Header Section --- */
-        .hub-header {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .hub-logo {
-            width: 180px; /* Sets the size of your rainbow-edged logo */
-            height: auto;
-            margin-bottom: 20px;
-            /* Subtly applies a filter to make the rainbow edge pop */
-            filter: drop-shadow(0 0 10px rgba(255, 0, 255, 0.5));
-            border-radius: 50%; /* Makes the container round to match the logo vibe */
-        }
-
-        .hub-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: var(--midas-gold);
-            letter-spacing: -2px;
-            margin: 0;
-            text-transform: uppercase;
-            text-shadow: 0 0 15px var(--midas-gold-glow);
-        }
-
-        .hub-subtitle {
-            font-size: 0.9rem;
-            letter-spacing: 5px;
-            color: #888;
-            text-transform: uppercase;
-            margin-top: 5px;
-        }
-
-        /* --- Main Interactive Panels --- */
-        .panel-grid {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        .midas-card {
-            background: var(--midas-card-bg);
-            border: 1px solid rgba(252, 194, 0, 0.1);
-            border-radius: 12px;
-            padding: 30px;
-            transition: all 0.3s ease;
-            position: relative;
             overflow: hidden;
+            background: radial-gradient(circle at center, #111 0%, #050505 100%);
         }
 
-        .midas-card:hover {
-            border-color: var(--midas-gold);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+        /* Animated Background Particles */
+        .bg-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: var(--gold);
+            filter: blur(150px);
+            opacity: 0.1;
+            border-radius: 50%;
+            z-index: 0;
+            animation: float-bg 10s infinite alternate;
         }
 
-        .card-header {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--midas-gold);
-            text-transform: uppercase;
+        @keyframes float-bg {
+            from { transform: translate(-50%, -50%); }
+            to { transform: translate(50%, 50%); }
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Floating Logo Animation */
+        .logo {
+            width: 160px;
+            filter: drop-shadow(0 0 20px rgba(252, 194, 0, 0.3));
+            animation: breathe 4s ease-in-out infinite;
             margin-bottom: 20px;
-            border-bottom: 2px solid rgba(252, 194, 0, 0.1);
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.02); }
+        }
+
+        h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.8rem;
+            letter-spacing: 8px;
+            color: var(--gold);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .glass-card {
+            background: var(--card);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        /* Interactive Menu */
+        .menu-item {
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            background: rgba(255,255,255,0.02);
+            text-transform: uppercase;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+        }
+
+        .menu-item:hover {
+            border-color: var(--gold);
+            background: rgba(252, 194, 0, 0.05);
+            letter-spacing: 4px;
+        }
+
+        /* Games List Animation */
+        #games-list {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: left;
+            font-size: 0.75rem;
+            color: #888;
+        }
+
+        #games-list.active {
+            max-height: 200px;
+            margin-top: 10px;
             padding-bottom: 10px;
         }
 
-        /* --- Section 1: Connection --- */
-        .connection-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.8rem;
-            color: #ccc;
-        }
-
-        .pulse-light {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background-color: #00ff88; /* Operational green */
-            animation: pulse-green 1.5s infinite;
-        }
-
-        @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 255, 136, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0); }
-        }
-
-        /* --- Section 2: Supported Games (This is the dynamic part) --- */
-        .supported-games-header {
-            cursor: pointer; /* Tells the user they can click it */
-            color: var(--midas-gold);
-            transition: color 0.2s ease;
-        }
-
-        .supported-games-header:hover {
-            color: #ffffff;
-        }
-
-        .game-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            font-size: 0.9rem;
-            color: #eee;
-            /* Starts hidden */
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease, opacity 0.4s ease;
-            opacity: 0;
-        }
-
-        .game-list.open {
-            /* Opens and shows the list */
-            max-height: 500px;
-            margin-top: 15px;
-            opacity: 1;
-        }
-
-        .game-item {
+        .game-entry {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
 
-        .game-item:last-child {
-            border-bottom: none;
-        }
+        .status-dot { color: var(--gold); }
 
-        .badge {
-            background-color: #ffffff;
-            color: #000;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-        }
-
-        /* --- Action Area --- */
-        .midas-action-panel {
+        /* Button Styling */
+        .btn {
+            margin-top: 20px;
             width: 100%;
-            text-align: center;
-            max-width: 600px;
-        }
-
-        .midas-button {
-            background-color: transparent;
-            border: 2px solid var(--midas-gold);
-            color: var(--midas-gold);
-            padding: 15px 40px;
-            font-size: 1rem;
+            padding: 15px;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Syncopate', sans-serif;
             font-weight: 700;
-            text-transform: uppercase;
-            border-radius: 6px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
+            transition: 0.3s;
         }
 
-        .midas-button:hover {
-            background-color: var(--midas-gold);
+        .btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(252, 194, 0, 0.4);
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            background: var(--gold);
             color: #000;
-            box-shadow: 0 0 20px var(--midas-gold-glow);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            display: none;
+            animation: slideUp 0.3s ease;
         }
 
-        /* --- The rainbow bar across the top --- */
-        .rainbow-top {
-            width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #ff00ff, #00ffff, #00ff00, #ffff00, #ff0000);
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-
+        @keyframes slideUp { from { transform: translateY(100px); } to { transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <div class="rainbow-top"></div>
+    <div class="bg-glow"></div>
 
-    <div class="viewport-container">
-
-        <header class="hub-header">
-            <img src="image_0.png" alt="Midas Hub Logo" class="hub-logo">
-            <h1 class="hub-title">Midas Hub</h1>
-            <div class="hub-subtitle">Elite Automation Network</div>
-        </header>
-
-        <main class="panel-grid">
+    <div class="main-container">
+        <img src="Midas hub 2.png" class="logo" alt="MIDAS">
+        <h1>MIDAS HUB</h1>
+        
+        <div class="glass-card">
+            <div class="menu-item" onclick="toggleGames()">
+                > SUPPORTED GAMES
+            </div>
             
-            <div class="midas-card">
-                <div class="card-header">Hub Connection</div>
-                <div class="connection-status">
-                    <div class="pulse-light"></div>
-                    <span>SYSTEM_OPERATIONAL // SECURE</span>
-                </div>
-                <p style="font-size: 0.8rem; color: #777; margin-top: 15px;">
-                    Midas Hub network is currently stable. v2.4.1 [Stable_Build]. No global downtime reported. 
-                </p>
+            <div id="games-list">
+                <div class="game-entry"><span>BURGERZ</span> <span class="status-dot">● ONLINE</span></div>
+                <div class="game-entry"><span>DIVE!!!V0.2A</span> <span class="status-dot">● ONLINE</span></div>
             </div>
 
-            <div class="midas-card">
-                <div class="card-header supported-games-header" onclick="toggleGameList()">
-                    Supported Games (Click to view)
-                </div>
-                <ul class="game-list" id="game-list">
-                    <li class="game-item">
-                        <span>Burgerz</span>
-                        <span class="badge">ACTIVE</span>
-                    </li>
-                    <li class="game-item">
-                        <span>Dive!!!v0.2A</span>
-                        <span class="badge">TESTING</span>
-                    </li>
-                </div>
-            </ul>
+            <button class="btn" onclick="copyScript()">COPY LOADSTRING</button>
         </div>
 
-    </main>
-
-    <div class="midas-action-panel">
-        <a href="#" class="midas-button">ACCESS LOADSTRING</a>
+        <p style="margin-top: 20px; font-size: 0.6rem; color: #444; letter-spacing: 2px;">
+            STABLE_BUILD // ENCRYPTED_ACCESS
+        </p>
     </div>
 
-</div>
+    <div id="notif" class="notification">LOADSTRING COPIED!</div>
 
-<script>
-    function toggleGameList() {
-        const gameList = document.getElementById('game-list');
-        gameList.classList.toggle('open');
-    }
-</script>
+    <script>
+        function toggleGames() {
+            document.getElementById('games-list').classList.toggle('active');
+        }
 
+        function copyScript() {
+            const script = 'loadstring(game:HttpGet("YOUR_LINK_HERE"))()';
+            navigator.clipboard.writeText(script);
+            
+            const notif = document.getElementById('notif');
+            notif.style.display = 'block';
+            setTimeout(() => { notif.style.display = 'none'; }, 2000);
+        }
+    </script>
 </body>
 </html>
