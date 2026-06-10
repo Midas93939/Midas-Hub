@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Midas Hub — Donations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#0d0d0d;
+  --text:#ffffff;
+  --border:rgba(255,255,255,0.08);
+  --border2:rgba(255,255,255,0.14);
+  --pill-bg:rgba(255,255,255,0.06);
+  --pill-border:rgba(255,255,255,0.12);
+  --green:#22c55e;
+  --green-dark:#16a34a;
+  --green-glow:rgba(34,197,94,0.35);
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+
+/* DOT GRID */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size:28px 28px;pointer-events:none;z-index:0;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse 75% 75% at 50% 50%, transparent 25%, var(--bg) 100%);
+  pointer-events:none;z-index:0;
+}
+
+/* ── PAGE BLUR LOADER ── */
+#page-loader{
+  position:fixed;inset:0;z-index:9000;
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  background:rgba(13,13,13,0.6);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity .7s ease;
+}
+#page-loader.fade-out{opacity:0;pointer-events:none}
+.loader-spinner{
+  width:36px;height:36px;border-radius:50%;
+  border:3px solid rgba(255,255,255,0.1);
+  border-top-color:rgba(255,255,255,0.7);
+  animation:spin .7s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── KEYFRAMES ── */
+@keyframes nav-drop{
+  from{opacity:0;transform:translateY(-20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fade-up{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes glow-pulse{
+  0%,100%{text-shadow:0 0 24px rgba(245,197,66,0.12)}
+  50%{text-shadow:0 0 52px rgba(245,197,66,0.32),0 0 80px rgba(245,197,66,0.1)}
+}
+@keyframes shine{
+  0%{left:-80%}60%,100%{left:160%}
+}
+@keyframes card-in{
+  from{opacity:0;transform:translateY(24px) scale(.97)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* ── NAVBAR ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 40px;height:52px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(13,13,13,0.82);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+  animation:nav-drop .5s ease both;
+}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:var(--text)}
+.nav-logo-icon{width:28px;height:28px;border-radius:7px;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.nav-logo-icon img{width:100%;height:100%;object-fit:contain}
+.nav-logo-text{font-size:15px;font-weight:700;letter-spacing:-.3px}
+.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
+.nav-links a{font-size:13.5px;font-weight:500;color:rgba(255,255,255,.7);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:#fff}
+
+/* ── MAIN ── */
+main{
+  position:relative;z-index:10;
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+  padding:110px 24px 80px;
+}
+
+/* ── PAGE TITLE ── */
+.page-title{
+  font-size:62px;font-weight:800;letter-spacing:-3px;line-height:1;
+  color:#fff;text-align:center;margin-bottom:64px;
+  animation:fade-up .6s .1s ease both, glow-pulse 4s 1s ease-in-out infinite;
+}
+
+/* ── DONATION SECTION ── */
+.donation-section{
+  width:100%;max-width:720px;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:20px;
+  padding:48px 40px 52px;
+  display:flex;flex-direction:column;align-items:center;
+  animation:card-in .7s .25s ease both;
+  backdrop-filter:blur(6px);
+}
+.donation-section-title{
+  font-size:28px;font-weight:700;letter-spacing:-.8px;
+  color:#fff;margin-bottom:10px;text-align:center;
+}
+.donation-section-sub{
+  font-size:14px;color:rgba(255,255,255,.45);margin-bottom:40px;text-align:center;
+}
+
+/* ── DONATION GRID ── */
+.donation-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  width:100%;
+}
+.donation-item{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.donation-amount-label{
+  font-size:13px;font-weight:500;color:rgba(255,255,255,.55);
+  letter-spacing:.2px;
+}
+.donation-btn{
+  width:100%;
+  padding:14px 10px;
+  border-radius:12px;
+  background:linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  border:1px solid rgba(34,197,94,0.4);
+  color:#fff;
+  font-size:16px;font-weight:700;letter-spacing:-.3px;
+  cursor:pointer;
+  position:relative;overflow:hidden;
+  transition:transform .18s, box-shadow .18s, background .18s;
+  box-shadow:0 4px 18px rgba(22,163,74,0.25);
+  text-decoration:none;display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.donation-btn::after{
+  content:'';position:absolute;top:0;left:-80%;width:60%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
+  animation:shine 3s ease infinite;
+}
+.donation-btn:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 8px 28px rgba(22,163,74,0.45), 0 0 0 1px rgba(34,197,94,0.5);
+  background:linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+}
+.donation-btn:active{transform:scale(.97)}
+.donation-btn .btn-robux-icon{
+  width:18px;height:18px;opacity:.85;flex-shrink:0;
+}
+
+/* ── BACK LINK ── */
+.back-link{
+  margin-top:36px;
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:13px;font-weight:500;color:rgba(255,255,255,.45);
+  text-decoration:none;
+  transition:color .15s;
+  animation:fade-up .6s .5s ease both;
+}
+.back-link:hover{color:rgba(255,255,255,.8)}
+.back-link svg{width:14px;height:14px}
+
+/* ── NOTICE ── */
+.coming-soon-notice{
+  margin-top:24px;
+  font-size:12px;color:rgba(255,255,255,.25);
+  text-align:center;
+  animation:fade-up .6s .6s ease both;
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE BLUR LOADER -->
+<div id="page-loader">
+  <div class="loader-spinner"></div>
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <a href="tester.html" class="nav-logo">
+    <div class="nav-logo-icon">
+      <img src="https://raw.githubusercontent.com/Midas93939/Midas-Hub/refs/heads/main/image_0.png" alt="Midas Hub logo"/>
+    </div>
+    <span class="nav-logo-text">Midas Hub</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="tester.html#">Key System</a></li>
+    <li><a href="tester.html#">Our Shop</a></li>
+    <li><a href="tester.html#">Dashboard</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- Page title -->
+  <h1 class="page-title">Midas Hub</h1>
+
+  <!-- Donation section -->
+  <div class="donation-section">
+    <h2 class="donation-section-title">Small Robux Donations</h2>
+    <p class="donation-section-sub">Every donation helps keep the hub alive and updated. Thank you!</p>
+
+    <div class="donation-grid">
+
+      <!-- 5 Robux -->
+      <div class="donation-item">
+        <span class="donation-amount-label">5 Robux</span>
+        <a href="#" class="donation-btn" id="btn-5">
+          <svg class="btn-robux-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+          </svg>
+          5
+        </a>
+      </div>
+
+      <!-- 10 Robux -->
+      <div class="donation-item">
+        <span class="donation-amount-label">10 Robux</span>
+        <a href="#" class="donation-btn" id="btn-10">
+          <svg class="btn-robux-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+          </svg>
+          10
+        </a>
+      </div>
+
+      <!-- 20 Robux -->
+      <div class="donation-item">
+        <span class="donation-amount-label">20 Robux</span>
+        <a href="#" class="donation-btn" id="btn-20">
+          <svg class="btn-robux-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+          </svg>
+          20
+        </a>
+      </div>
+
+      <!-- 30 Robux -->
+      <div class="donation-item">
+        <span class="donation-amount-label">30 Robux</span>
+        <a href="#" class="donation-btn" id="btn-30">
+          <svg class="btn-robux-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+          </svg>
+          30
+        </a>
+      </div>
+
+      <!-- 40 Robux -->
+      <div class="donation-item">
+        <span class="donation-amount-label">40 Robux</span>
+        <a href="#" class="donation-btn" id="btn-40">
+          <svg class="btn-robux-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+          </svg>
+          40
+        </a>
+      </div>
+
+      <!-- 50 Robux -->
+      <div class="donation-item">
+        <span class="donation-amount-label">50 Robux</span>
+        <a href="#" class="donation-btn" id="btn-50">
+          <svg class="btn-robux-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+          </svg>
+          50
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <a href="index.html" class="back-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5M12 5l-7 7 7 7"/>
+    </svg>
+    Back to Midas Hub
+  </a>
+
+  <p class="coming-soon-notice">Links will be added soon. Thank you for your support!</p>
+
+</main>
+
+<script>
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loader = document.getElementById('page-loader');
+    loader.classList.add('fade-out');
+    setTimeout(() => loader.style.display = 'none', 750);
+  }, 600);
+});
+</script>
+</body>
+</html>
